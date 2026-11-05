@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>ねむログ</title>
+<meta name="theme-color" content="#0b1020">
+<meta name="apple-mobile-web-app-title" content="ねむログ">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADGklEQVR42u3dsU0DQRBA0fXJmQnIEBkI2qAFWqEWWnELtAFyiMgpgMASQmBhsGFvZvb9CIiweczt+by+xer0okm7mjwFgkNwCA7BITgEh+AQHIJDcEhwCA7BITgEh+AQHIJDcAgOCQ7BITgEh+AQHIJDcAgOwSHBITgEh+BQj5bDPvLXh9uvPzy5WTMxIo6dGsgYF8deEGQMh+PnJsgYCMdvWZAxBI4DWJBRH8dhLMgojuNgFqqM43gWxkYr+QopGXCQ4bAy9grj6XGz/eLq+tLkmFlGqLHxLuPT13CYGZu9P4GjnwyrjVI4vJIBRw8Z0cbG1xVotDXpZGYE8RHwbGUR8+6Qfy7DaqPI5LDOgKOfDGOjAg4zAw7BEWNsOKakx+GAAgcZcAiO+GPDgsPkUEUcVhtwCA5jA44sWY1mxWFswCE4jA04BIc0Ew7HFDgEh+AQHBYcLfje656brU2OfLvyu/mAI+XnNfTxAYfgaHW2XLdeu66nwqvRYovfdxDd9uMv/VPmnR8OK7LmEByCo9mCC4fgEBzSWDgsO+AQHILDkQUOwWF4wNFse4fD8IBDcIyU4QGHcuKYfU1qeJgcgsPwgIOPUXAEeSmMD5NDcBgeZXDEucjCh8nBRyocoa7Q8mFy8JEHR7S3d/BhcvCRBEfA94bxYXLwkQFHzDeW8mFy7PExOJHJzdiMkOiTg4+ALVanF/4M9t1Yc1iFZJ4ciWb4CFMkHI5cx/jaRCLiSLcGrEokKI6k5wg7lWxvf9H5k6mL48h+DrmF8vHGKOl8hMaR3cfL+X2b9ZPtW+27JpzcrCudPX56LMEXK5Pl3v919nz3zbfxH9fkdKCPj3QyEqw5Sl7jyGI9E44ypzDNtRXPb/bffPIs+53rHFbSHWLyjrrcOIITyX7NpQKOgERqXIqrgyMIkUpXaKvhmJFIvQv3NXH0VFL4/T7FcfwTlEHeaTwQjmOsjHm/h3FxqNmaIDgEh+AQHIJDcAgOwSE4PAWCQ3AIDsEhOASH4BAcgkNwSHAIDsEhOASH4BAcgkNwCA4JDsEhOASHevYGJw0I3FFHQgQAAAAASUVORK5CYII=">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADGklEQVR42u3dsU0DQRBA0fXJmQnIEBkI2qAFWqEWWnELtAFyiMgpgMASQmBhsGFvZvb9CIiweczt+by+xer0okm7mjwFgkNwCA7BITgEh+AQHIJDcEhwCA7BITgEh+AQHIJDcAgOCQ7BITgEh+AQHIJDcAgOwSHBITgEh+BQj5bDPvLXh9uvPzy5WTMxIo6dGsgYF8deEGQMh+PnJsgYCMdvWZAxBI4DWJBRH8dhLMgojuNgFqqM43gWxkYr+QopGXCQ4bAy9grj6XGz/eLq+tLkmFlGqLHxLuPT13CYGZu9P4GjnwyrjVI4vJIBRw8Z0cbG1xVotDXpZGYE8RHwbGUR8+6Qfy7DaqPI5LDOgKOfDGOjAg4zAw7BEWNsOKakx+GAAgcZcAiO+GPDgsPkUEUcVhtwCA5jA44sWY1mxWFswCE4jA04BIc0Ew7HFDgEh+AQHBYcLfje656brU2OfLvyu/mAI+XnNfTxAYfgaHW2XLdeu66nwqvRYovfdxDd9uMv/VPmnR8OK7LmEByCo9mCC4fgEBzSWDgsO+AQHILDkQUOwWF4wNFse4fD8IBDcIyU4QGHcuKYfU1qeJgcgsPwgIOPUXAEeSmMD5NDcBgeZXDEucjCh8nBRyocoa7Q8mFy8JEHR7S3d/BhcvCRBEfA94bxYXLwkQFHzDeW8mFy7PExOJHJzdiMkOiTg4+ALVanF/4M9t1Yc1iFZJ4ciWb4CFMkHI5cx/jaRCLiSLcGrEokKI6k5wg7lWxvf9H5k6mL48h+DrmF8vHGKOl8hMaR3cfL+X2b9ZPtW+27JpzcrCudPX56LMEXK5Pl3v919nz3zbfxH9fkdKCPj3QyEqw5Sl7jyGI9E44ypzDNtRXPb/bffPIs+53rHFbSHWLyjrrcOIITyX7NpQKOgERqXIqrgyMIkUpXaKvhmJFIvQv3NXH0VFL4/T7FcfwTlEHeaTwQjmOsjHm/h3FxqNmaIDgEh+AQHIJDcAgOwSE4PAWCQ3AIDsEhOASH4BAcgkNwSHAIDsEhOASH4BAcgkNwCA4JDsEhOASHevYGJw0I3FFHQgQAAAAASUVORK5CYII=">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+  --bg:#0b1020; --card:#151b30; --card2:#1c2440; --line:#2a3358;
+  --text:#e8ecff; --sub:#9aa3c7; --accent:#8fa8ff; --good:#5fd3a4; --bad:#ff8a8a; --warn:#ffd36e;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}
+body{padding:env(safe-area-inset-top) 16px calc(env(safe-area-inset-bottom) + 84px) 16px;min-height:100vh}
+h1{font-size:20px;margin:18px 0 4px;letter-spacing:.05em}
+.sub{color:var(--sub);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+label{font-size:14px;color:var(--sub)}
+input[type=time]{font-size:40px;font-weight:600;background:var(--card2);color:var(--text);
+  border:1px solid var(--line);border-radius:14px;padding:6px 14px;width:100%;text-align:center;
+  font-variant-numeric:tabular-nums;-webkit-appearance:none;appearance:none;min-height:70px}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card2);
+  color:var(--text);font-size:22px}
+.stepper span{min-width:70px;text-align:center;font-size:20px;font-weight:600}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:18px;font-size:18px;font-weight:700;
+  background:var(--accent);color:#0b1020;margin-top:12px}
+.btn.ghost{background:transparent;color:var(--sub);border:1px solid var(--line);font-weight:500;font-size:15px;padding:14px}
+.btn.good{background:var(--good)}
+.bigclock{font-size:64px;font-weight:700;text-align:center;font-variant-numeric:tabular-nums;margin:12px 0 0}
+.center{text-align:center}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--card2);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:24px;margin-top:4px;font-variant-numeric:tabular-nums}
+.list .item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.list .item:last-child{border-bottom:0}
+.del{background:none;border:0;color:var(--sub);font-size:13px;padding:6px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(11,16,32,.95);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(10px)}
+nav button{flex:1;background:none;border:0;color:var(--sub);padding:14px 0;font-size:15px;font-weight:600}
+nav button.on{color:var(--accent)}
+.hidden{display:none!important}
+.note{font-size:12px;color:var(--sub);line-height:1.6}
+.pill{display:inline-block;font-size:12px;padding:3px 8px;border-radius:99px;background:var(--card2);color:var(--sub)}
+.ok{color:var(--good)} .ng{color:var(--bad)}
+#ring{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:24px;background:#1a1030;animation:flash 1s infinite}
+@keyframes flash{0%,100%{background:#1a1030}50%{background:#3b2370}}
+#ring .bigclock{font-size:80px}
+#ring .btn{max-width:420px}
+#modal{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:24px}
+#modal .card{max-width:380px;width:100%}
+#toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--card2);border:1px solid var(--line);
+  padding:10px 16px;border-radius:12px;font-size:14px;z-index:70;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90%}
+#toast.show{opacity:1}
+svg text{fill:var(--sub);font-size:10px}
+</style>
+</head>
+<body>
+
+<!-- ===== ねる画面 ===== -->
+<section id="v-sleep">
+  <h1>ねむログ</h1>
+  <div class="sub">アラームをセットした瞬間から睡眠記録スタート</div>
+
+  <div id="idle">
+    <div class="card">
+      <label>起きる時刻</label>
+      <input type="time" id="alarmTime" value="06:30">
+      <div class="sub center" id="untilText" style="margin-top:8px"></div>
+    </div>
+    <div class="card row">
+      <label>目標睡眠時間</label>
+      <div class="stepper">
+        <button id="tMinus">−</button><span id="targetText">7.0h</span><button id="tPlus">＋</button>
+      </div>
+    </div>
+    <div class="card">
+      <label>アラームの鳴らし方</label>
+      <div class="stepper" style="margin-top:8px;gap:8px">
+        <button id="modeClock" style="flex:1;width:auto;font-size:14px">⏰ 時計アプリ</button>
+        <button id="modeWeb" style="flex:1;width:auto;font-size:14px">📱 このページ</button>
+      </div>
+      <div class="note" id="modeNote" style="margin-top:8px"></div>
+    </div>
+    <button class="btn" id="startBtn">おやすみ（アラームON・記録開始）</button>
+    <a id="scLink" class="hidden" href="#">shortcut</a>
+    <details class="card note" id="setupCard">
+      <summary style="font-size:14px;color:var(--text);font-weight:600">⏰ 時計アプリ連携の初期設定（最初の1回だけ）</summary>
+      <div id="scInstall" class="hidden">
+        <p><b>下のボタンを押して「ショートカットを追加」をタップするだけ</b>です。</p>
+        <a class="btn" id="scInstallLink" href="#" style="text-align:center;text-decoration:none">⬇ ショートカットを追加</a>
+      </div>
+      <div id="scManual">
+        <p><b>ショートカットを1つ作ります（約1分）</b><br>
+        ① ショートカットApp →「＋」→ 名前を <b>ねむログアラーム</b> にする<br>
+        ② アクション「<b>アラームを作成</b>」を追加<br>
+        ③ 時刻の欄をタップ →「<b>ショートカットの入力</b>」を選ぶ → 完了</p>
+        <p>うまくいかない場合だけ、②の前に「<b>入力から日付を取得</b>」を足し、③で「日付」を選んでください。</p>
+      </div>
+      <p>朝はこのアプリを開けば「起きた？」と聞くので、ボタン1つで記録できます。</p>
+      <p>※ 「おやすみ」を押してもショートカットが開かない場合は、Safariで開くかホーム画面に追加して使ってください。</p>
+      <p>※ 毎晩アラームが新しく1件ずつ増えます。時計アプリでたまに削除してください。</p>
+    </details>
+    <div class="card note" id="webNote">
+      <b>⚠ iPhoneで確実に鳴らすために</b><br>
+      ・このページを<b>開いたまま</b>にする（ホームに戻ったり別アプリを開くと止まります）<br>
+      ・充電しながら置く（記録中は画面を点けたままにします）<br>
+      ・音量を上げておく。<b>消音（マナー）スイッチ</b>がオンだと鳴らないことがあります<br>
+      ・最初の数回は、iPhone標準の時計アプリのアラームも保険でかけておく
+    </div>
+  </div>
+
+  <div id="sleeping" class="hidden">
+    <div class="card center">
+      <div class="pill">記録中 💤</div>
+      <div class="bigclock" id="nowClock">--:--</div>
+      <div class="sub" id="sleepInfo"></div>
+    </div>
+    <button class="btn good hidden" id="wakeAtAlarmBtn">アラームの時刻に起きた</button>
+    <button class="btn good" id="wakeEarlyBtn">もう起きた（記録終了）</button>
+    <button class="btn ghost" id="cancelBtn">キャンセル（記録しない）</button>
+    <div class="note center" style="margin-top:12px" id="wakeLockNote"></div>
+  </div>
+</section>
+
+<!-- ===== 記録画面 ===== -->
+<section id="v-stats" class="hidden">
+  <h1>この1週間</h1>
+  <div class="sub" id="rangeText"></div>
+  <div class="card">
+    <div class="stats">
+      <div class="stat"><span class="sub">平均睡眠</span><b id="avgText">--</b></div>
+      <div class="stat"><span class="sub">目標達成</span><b id="hitText">--</b></div>
+      <div class="stat"><span class="sub">目標との差（平均）</span><b id="diffText">--</b></div>
+      <div class="stat"><span class="sub">平均起床</span><b id="wakeAvgText">--</b></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="row"><span class="sub">日ごとの睡眠時間</span><span class="pill" id="targetPill"></span></div>
+    <svg id="chart" viewBox="0 0 320 170" width="100%"></svg>
+  </div>
+  <div class="card list" id="history"></div>
+  <div class="card">
+    <div class="row"><b style="font-size:15px">💾 バックアップ</b></div>
+    <div class="note" id="storageNote" style="margin:6px 0"></div>
+    <button class="btn ghost" id="bkCopy">バックアップをコピー（メモ等に貼って保存）</button>
+    <button class="btn ghost" id="bkFile">ファイルに保存</button>
+    <details style="margin-top:10px"><summary class="sub">バックアップから復元</summary>
+      <textarea id="bkText" rows="4" placeholder="コピーしたバックアップを貼り付け" style="width:100%;margin-top:8px;background:var(--card2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:8px;font-size:13px"></textarea>
+      <button class="btn ghost" id="bkRestore">貼り付けた内容で復元</button>
+      <label class="btn ghost" style="text-align:center">ファイルから復元<input type="file" id="bkInput" accept=".json,application/json,text/plain" class="hidden"></label>
+    </details>
+  </div>
+  <div class="card note hidden" id="a2hs">📲 <b>ホーム画面に追加すると記録が消えにくくなります。</b><br>Safariの共有ボタン →「ホーム画面に追加」。以後はホーム画面のアイコンから開いてください（Safariで開いた分とは記録が別になります）。</div>
+</section>
+
+<nav>
+  <button id="tab-sleep" class="on">🌙 ねる</button>
+  <button id="tab-stats">📊 記録</button>
+</nav>
+
+<!-- アラーム鳴動 -->
+<div id="ring" class="hidden">
+  <div class="sub">おはよう！</div>
+  <div class="bigclock" id="ringClock">--:--</div>
+  <div class="sub" id="ringInfo" style="margin-bottom:20px"></div>
+  <button class="btn good" id="stopBtn" style="font-size:22px;padding:24px">止める（起床を記録）</button>
+  <button class="btn ghost" id="snoozeBtn">スヌーズ 5分</button>
+</div>
+
+<div id="modal" class="hidden"><div class="card">
+  <div id="modalText" style="margin-bottom:8px"></div>
+  <button class="btn" id="modalOk">OK</button>
+  <button class="btn ghost" id="modalCancel">やめる</button>
+</div></div>
+<div id="toast"></div>
+
+<audio id="player" playsinline preload="auto"></audio>
+
+<script>
+(() => {
+// ---------- 状態 ----------
+const KEY = "nemulog-v1";
+let state = { target: 7, alarm: "06:30", records: [], active: null, mode: "clock" };
+const IS_SITE = /github\.io$/.test(location.hostname);
+const PAGE_URL = IS_SITE ? location.origin+location.pathname : "https://claude.ai/artifact/688QeihTdsXHnM8vZB1Svp";
+const SC_NAME = "ねむログアラーム";
+// iCloudで共有したショートカットのリンク（https://www.icloud.com/shortcuts/...）。入れると1タップ追加ボタンが出る
+const SC_SHARE_URL = "";
+// active: {start:ms, alarmAt:ms}
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, "0");
+const hm = ms => { const d = new Date(ms); return pad(d.getHours()) + ":" + pad(d.getMinutes()); };
+const dur = min => { min = Math.round(min); return Math.floor(min/60) + "時間" + pad(min%60) + "分"; };
+const dayKey = ms => { const d = new Date(ms); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); };
+
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2500); }
+function ask(text, okLabel="OK"){ return new Promise(res=>{
+  $("modalText").textContent=text; $("modalOk").textContent=okLabel; $("modal").classList.remove("hidden");
+  const done=v=>{ $("modal").classList.add("hidden"); $("modalOk").onclick=$("modalCancel").onclick=null; res(v); };
+  $("modalOk").onclick=()=>done(true); $("modalCancel").onclick=()=>done(false);
+});}
+
+// ---------- 保存（端末内 + 使えればアカウント側） ----------
+function loadLocal(){ try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s&&Array.isArray(s.records)) state=Object.assign(state,s); }catch(e){} }
+let db=null, docRef=null, saveTimer=null;
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  if(docRef){ clearTimeout(saveTimer); saveTimer=setTimeout(async()=>{ try{ await docRef.set(JSON.parse(JSON.stringify(state))); }catch(e){} },400); }
+}
+function unwrap(r){ if(!r) return null; if(typeof r.data==="function") return r.data(); if(r.exists===false) return null;
+  if(r.data && typeof r.data==="object") return r.data; return r; }
+async function connectDb(){
+  try{
+    if(!window.claude || typeof window.claude.use!=="function") return;
+    const [d,u]=await Promise.all([claude.use("db"), claude.use("user")]);
+    if(!d||!u) return;
+    const uid=await u.id(); if(!uid) return;
+    db=d; docRef=db.collection("data/users/"+uid).doc("sleep");
+    const remote=unwrap(await docRef.get());
+    if(remote && Array.isArray(remote.records)){
+      const ids=new Set(state.records.map(r=>r.id));
+      remote.records.forEach(r=>{ if(!ids.has(r.id)) state.records.push(r); });
+      if(remote.target) state.target=remote.target;
+      if(remote.alarm) state.alarm=remote.alarm;
+      if(!state.active && remote.active) state.active=remote.active;
+      state.records.sort((a,b)=>a.end-b.end);
+    }
+    save(); renderAll();
+    $("storageNote").textContent="記録はあなたのClaudeアカウントに保存されています（あなただけが見られます）。";
+  }catch(e){}
+}
+
+// ---------- 音（iPhone対策：タップ時に音声を有効化しておく） ----------
+function makeWav(seconds, gen){
+  const rate=22050, n=Math.floor(rate*seconds), buf=new ArrayBuffer(44+n*2), v=new DataView(buf);
+  const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
+  w(0,"RIFF");v.setUint32(4,36+n*2,true);w(8,"WAVE");w(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);
+  v.setUint16(22,1,true);v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
+  w(36,"data");v.setUint32(40,n*2,true);
+  for(let i=0;i<n;i++){ v.setInt16(44+i*2, Math.max(-1,Math.min(1,gen(i/rate)))*32767*0.9, true); }
+  return URL.createObjectURL(new Blob([buf],{type:"audio/wav"}));
+}
+// ピピピッ…のパターン（1.6秒ループ）
+const alarmUrl=makeWav(1.6,t=>{ const slot=Math.floor(t/0.2); if(slot>=6||slot%2) return 0;
+  const lt=t-slot*0.2, env=Math.min(1,lt*80,(0.2-lt)*80); return Math.sign(Math.sin(2*Math.PI*1046*t))*0.6*env; });
+const silentUrl=makeWav(1,()=>0);
+const player=$("player"); player.loop=true;
+let actx=null, oscTimer=null;
+
+function unlockAudio(){
+  try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
+  try{ player.src=silentUrl; player.play().catch(()=>{}); }catch(e){}
+  try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); actx.resume(); }catch(e){}
+}
+function startAlarmSound(){
+  try{ player.src=alarmUrl; player.currentTime=0; player.play().catch(()=>fallbackBeep()); }catch(e){ fallbackBeep(); }
+  if(navigator.vibrate) try{ navigator.vibrate([400,200,400,200,400]); }catch(e){}
+}
+function fallbackBeep(){
+  if(!actx||oscTimer) return;
+  const beep=()=>{ try{ for(let k=0;k<3;k++){ const o=actx.createOscillator(), g=actx.createGain(); o.type="square"; o.frequency.value=1046;
+    const t0=actx.currentTime+k*0.4; g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(0.4,t0+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001,t0+0.2); o.connect(g).connect(actx.destination); o.start(t0); o.stop(t0+0.22);} }catch(e){} };
+  beep(); oscTimer=setInterval(beep,1600);
+}
+function stopAlarmSound(){
+  clearInterval(oscTimer); oscTimer=null;
+  try{ player.pause(); player.src=silentUrl; }catch(e){}
+}
+
+// ---------- 画面を点けっぱなしにする ----------
+let wakeLock=null;
+async function holdScreen(){
+  try{ if("wakeLock" in navigator){ wakeLock=await navigator.wakeLock.request("screen");
+         $("wakeLockNote").textContent="画面を点けたままにしています。充電しながら置いてください。"; return; } }catch(e){}
+  $("wakeLockNote").textContent="⚠ 画面の自動ロックを止められませんでした。設定 → 画面表示と明るさ → 自動ロック を「なし」にしてから寝てください。";
+}
+function releaseScreen(){ try{ wakeLock&&wakeLock.release(); }catch(e){} wakeLock=null; }
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible" && state.active) holdScreen(); });
+
+// ---------- 睡眠フロー ----------
+function nextAlarm(hhmm){
+  const [h,m]=hhmm.split(":").map(Number), d=new Date(); d.setHours(h,m,0,0);
+  if(d.getTime()<=Date.now()) d.setDate(d.getDate()+1); return d.getTime();
+}
+let ringing=false, resumeNeeded=false;
+
+$("startBtn").onclick=()=>{
+  const t=$("alarmTime").value; if(!t){ toast("起きる時刻を入れてください"); return; }
+  state.alarm=t;
+  const mode=state.mode;
+  state.active={ start:Date.now(), alarmAt:nextAlarm(t), mode };
+  save();
+  if(mode==="web"){ unlockAudio(); holdScreen(); renderSleep(); toast(hm(state.active.alarmAt)+" に起こします。おやすみなさい"); return; }
+  renderSleep();
+  // ショートカットを起動して時計アプリにアラームを作る
+  const a=$("scLink");
+  a.href="shortcuts://run-shortcut?name="+encodeURIComponent(SC_NAME)+"&input=text&text="+encodeURIComponent(t);
+  try{ a.click(); }catch(e){}
+  toast("記録開始。ショートカットが開かなければ時計アプリで手動でセットしてください");
+};
+$("modeClock").onclick=()=>{ state.mode="clock"; save(); renderSleep(); };
+$("modeWeb").onclick=()=>{ state.mode="web"; save(); renderSleep(); };
+// ---------- バックアップ ----------
+function backupText(){ return JSON.stringify({app:"nemulog",v:1,target:state.target,alarm:state.alarm,records:state.records}); }
+$("bkCopy").onclick=async()=>{ try{ await navigator.clipboard.writeText(backupText()); toast("コピーしました。メモアプリ等に貼って保存してください"); }
+  catch(e){ $("bkText").value=backupText(); $("bkText").closest("details").open=true; toast("下の欄の文字を長押しでコピーしてください"); } };
+$("bkFile").onclick=()=>{ try{ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([backupText()],{type:"application/json"}));
+  a.download="nemulog-"+dayKey(Date.now())+".json"; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ toast("保存できませんでした。コピーを使ってください"); } };
+function restoreFrom(text){
+  let d; try{ d=JSON.parse(text); }catch(e){ toast("バックアップの形式が違います"); return; }
+  if(!d||!Array.isArray(d.records)){ toast("バックアップの形式が違います"); return; }
+  const ids=new Set(state.records.map(r=>r.id)); let n=0;
+  d.records.forEach(r=>{ if(r&&r.id&&typeof r.start==="number"&&typeof r.end==="number"&&!ids.has(r.id)){ state.records.push({id:String(r.id),start:r.start,end:r.end,min:Math.round(r.min)}); n++; } });
+  if(d.target) state.target=d.target; state.records.sort((a,b)=>a.end-b.end);
+  save(); renderAll(); toast(n+"件の記録を復元しました");
+}
+$("bkRestore").onclick=()=>restoreFrom($("bkText").value.trim());
+$("bkInput").onchange=e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(restoreFrom); e.target.value=""; };
+// 記録を消されにくくする
+try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
+const standalone = window.navigator.standalone===true || (window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
+if(IS_SITE && !standalone && /iPhone|iPad/.test(navigator.userAgent)) $("a2hs").classList.remove("hidden");
+if(IS_SITE && "serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(()=>{}); }
+if(SC_SHARE_URL){ $("scInstall").classList.remove("hidden"); $("scManual").classList.add("hidden"); $("scInstallLink").href=SC_SHARE_URL; }
+$("cancelBtn").onclick=async()=>{ if(await ask("今回の睡眠を記録せずに終了しますか？","記録せず終了")){ state.active=null; stopAlarmSound(); releaseScreen(); save(); renderSleep(); } };
+$("wakeEarlyBtn").onclick=()=>finishSleep();
+$("stopBtn").onclick=()=>finishSleep();
+$("snoozeBtn").onclick=()=>{ stopAlarmSound(); ringing=false; $("ring").classList.add("hidden");
+  state.active.alarmAt=Date.now()+5*60*1000; save(); renderSleep(); toast("5分後にもう一度鳴らします"); };
+
+$("wakeAtAlarmBtn").onclick=()=>finishSleep(state.active&&state.active.alarmAt);
+function finishSleep(endAt){
+  const a=state.active; if(!a) return;
+  stopAlarmSound(); ringing=false; $("ring").classList.add("hidden"); releaseScreen();
+  const end=(typeof endAt==="number")?endAt:Date.now(), min=(end-a.start)/60000;
+  state.active=null;
+  if(min<10){ toast("10分未満だったので記録しませんでした"); }
+  else{ state.records.push({ id:end.toString(36), start:a.start, end, min:Math.round(min) });
+        toast("おはよう！ "+dur(min)+" 眠りました"); }
+  save(); renderSleep(); renderStats();
+}
+
+function tick(){
+  const now=Date.now();
+  $("nowClock").textContent=hm(now);
+  $("ringClock").textContent=hm(now);
+  if(state.active){
+    const a=state.active;
+    const clock=a.mode==="clock", past=clock&&now>=a.alarmAt;
+    $("wakeAtAlarmBtn").classList.toggle("hidden",!past);
+    $("wakeAtAlarmBtn").textContent=`${hm(a.alarmAt)}（アラームの時刻）に起きた`;
+    $("wakeEarlyBtn").textContent=past?"今起きた（"+hm(now)+"）":"もう起きた（記録終了）";
+    $("sleepInfo").innerHTML=past
+      ? `<b style="font-size:20px;color:var(--text)">おはよう！いつ起きた？</b><br>${hm(a.start)} から記録中`
+      : `${hm(a.start)} から記録中（${dur((now-a.start)/60000)}）<br>アラーム ${hm(a.alarmAt)}`
+        + (clock?`（時計アプリ）<br><br>このページは閉じてOK。<br>朝このページを開けば記録できます。`:"");
+    if(!clock && now>=a.alarmAt && !ringing){
+      ringing=true; $("ringInfo").textContent=`${hm(a.start)} から ${dur((now-a.start)/60000)}`;
+      $("ring").classList.remove("hidden");
+      if(resumeNeeded){ $("ringInfo").textContent+="（音を出すには画面をタップ）"; }
+      startAlarmSound();
+    }
+  } else {
+    const t=$("alarmTime").value;
+    if(t){ const ms=nextAlarm(t)-now; $("untilText").textContent="今寝ると約 "+dur(ms/60000)+" 眠れます"
+      + (ms/3600000 < state.target ? `（目標 ${state.target}h に足りません）` : ""); }
+  }
+}
+// 再読み込みで記録中に戻ったとき：最初のタップで音を有効化
+document.addEventListener("click",()=>{ if(resumeNeeded){ unlockAudio(); resumeNeeded=false; if(ringing) startAlarmSound(); } },true);
+
+// ---------- 目標 ----------
+$("tMinus").onclick=()=>{ state.target=Math.max(4,Math.round((state.target-0.5)*2)/2); save(); renderAll(); };
+$("tPlus").onclick=()=>{ state.target=Math.min(12,Math.round((state.target+0.5)*2)/2); save(); renderAll(); };
+$("alarmTime").onchange=()=>{ state.alarm=$("alarmTime").value; save(); tick(); };
+
+// ---------- 描画 ----------
+function renderSleep(){
+  const on=!!state.active;
+  $("idle").classList.toggle("hidden",on); $("sleeping").classList.toggle("hidden",!on);
+  const clock=state.mode==="clock";
+  $("modeClock").style.background=clock?"var(--accent)":""; $("modeClock").style.color=clock?"#0b1020":"";
+  $("modeWeb").style.background=!clock?"var(--accent)":""; $("modeWeb").style.color=!clock?"#0b1020":"";
+  $("modeNote").textContent=clock
+    ? "iPhoneの時計アプリでアラームを鳴らします（確実・画面オフOK）。初回だけ下の初期設定が必要です。"
+    : "このページが音を鳴らします。画面を点けたまま開いておく必要があります。";
+  $("webNote").classList.toggle("hidden",clock);
+  $("wakeLockNote").classList.toggle("hidden",!!(state.active&&state.active.mode==="clock"));
+  $("targetText").textContent=state.target.toFixed(1)+"h";
+  if($("alarmTime").value!==state.alarm) $("alarmTime").value=state.alarm;
+  tick();
+}
+function renderStats(){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const days=[]; for(let i=6;i>=0;i--){ const d=new Date(today); d.setDate(d.getDate()-i); days.push(d); }
+  const byDay={}; state.records.forEach(r=>{ const k=dayKey(r.end); (byDay[k]=byDay[k]||[]).push(r); });
+  const vals=days.map(d=>{ const rs=byDay[dayKey(d.getTime())]||[]; return { d, min:rs.reduce((s,r)=>s+r.min,0), rs }; });
+  const rec=vals.filter(v=>v.min>0);
+  const tMin=state.target*60;
+  $("rangeText").textContent=`${days[0].getMonth()+1}/${days[0].getDate()} 〜 ${days[6].getMonth()+1}/${days[6].getDate()}（起きた日で集計）`;
+  $("targetPill").textContent="目標 "+state.target.toFixed(1)+"h";
+  if(rec.length){
+    const avg=rec.reduce((s,v)=>s+v.min,0)/rec.length, hit=rec.filter(v=>v.min>=tMin).length, diff=avg-tMin;
+    $("avgText").textContent=dur(avg);
+    $("hitText").innerHTML=`${hit}<span class="sub" style="font-size:14px"> / ${rec.length}日</span>`;
+    $("diffText").innerHTML=`<span class="${diff>=0?"ok":"ng"}">${diff>=0?"+":"−"}${dur(Math.abs(diff))}</span>`;
+    const wakes=rec.map(v=>{ const last=v.rs[v.rs.length-1]; const d=new Date(last.end); return d.getHours()*60+d.getMinutes(); });
+    const wa=wakes.reduce((s,x)=>s+x,0)/wakes.length; $("wakeAvgText").textContent=pad(Math.floor(wa/60))+":"+pad(Math.round(wa%60)%60);
+  } else { ["avgText","hitText","diffText","wakeAvgText"].forEach(id=>$(id).textContent="--"); }
+
+  // グラフ
+  const W=320,H=170,L=26,B=150,T=12, maxH=Math.max(10,state.target+1,...vals.map(v=>v.min/60+0.5));
+  const y=h=>B-(h/maxH)*(B-T), bw=(W-L-6)/7;
+  let s="";
+  for(let h=0;h<=maxH;h+=2){ s+=`<line x1="${L}" x2="${W}" y1="${y(h)}" y2="${y(h)}" stroke="#2a3358" stroke-width="0.5"/><text x="${L-4}" y="${y(h)+3}" text-anchor="end">${h}h</text>`; }
+  vals.forEach((v,i)=>{ const x=L+i*bw+bw*0.18, w=bw*0.64, h=v.min/60;
+    const col=v.min===0?"#2a3358":(v.min>=tMin?"#5fd3a4":"#ff8a8a");
+    if(v.min>0) s+=`<rect x="${x}" y="${y(h)}" width="${w}" height="${B-y(h)}" rx="4" fill="${col}"/><text x="${x+w/2}" y="${y(h)-3}" text-anchor="middle" style="fill:#e8ecff">${h.toFixed(1)}</text>`;
+    s+=`<text x="${x+w/2}" y="${B+13}" text-anchor="middle">${"日月火水木金土"[v.d.getDay()]}</text>`; });
+  s+=`<line x1="${L}" x2="${W}" y1="${y(state.target)}" y2="${y(state.target)}" stroke="#ffd36e" stroke-dasharray="4 3" stroke-width="1.2"/>`;
+  $("chart").innerHTML=s;
+
+  // 履歴
+  const list=state.records.slice().sort((a,b)=>b.end-a.end).slice(0,20);
+  $("history").innerHTML = list.length ? `<div class="sub" style="margin-bottom:4px">最近の記録</div>` + list.map(r=>{
+    const d=new Date(r.end);
+    return `<div class="item"><div>${d.getMonth()+1}/${d.getDate()}（${"日月火水木金土"[d.getDay()]}）<span class="sub"> ${hm(r.start)}→${hm(r.end)}</span></div>
+      <div><b class="${r.min>=tMin?"ok":"ng"}">${dur(r.min)}</b><button class="del" data-id="${r.id}">削除</button></div></div>`; }).join("")
+    : `<div class="sub center">まだ記録がありません。今夜「おやすみ」を押して始めましょう。</div>`;
+  $("history").querySelectorAll(".del").forEach(b=>b.onclick=async()=>{
+    if(await ask("この記録を削除しますか？","削除")){ state.records=state.records.filter(r=>r.id!==b.dataset.id); save(); renderStats(); } });
+  if(!docRef) $("storageNote").textContent="記録はこのiPhone内だけに保存されます（サーバーには送られません）。機種変更やデータ削除に備えて、ときどきバックアップしてください。";
+}
+function renderAll(){ renderSleep(); renderStats(); }
+
+// ---------- タブ ----------
+function show(tab){ $("v-sleep").classList.toggle("hidden",tab!=="sleep"); $("v-stats").classList.toggle("hidden",tab!=="stats");
+  $("tab-sleep").classList.toggle("on",tab==="sleep"); $("tab-stats").classList.toggle("on",tab==="stats"); if(tab==="stats") renderStats(); }
+$("tab-sleep").onclick=()=>show("sleep"); $("tab-stats").onclick=()=>show("stats");
+
+// ---------- 起動 ----------
+// ---------- #wake で開かれたら起床を記録（時計アプリのオートメーション用） ----------
+function handleWake(){
+  if(location.hash!=="#wake") return;
+  try{ location.hash="done"; }catch(e){}
+  if(state.active) finishSleep(); else toast("記録中の睡眠はありません");
+}
+window.addEventListener("hashchange",handleWake);
+
+loadLocal();
+if(state.active && state.active.mode!=="clock" && location.hash!=="#wake"){ resumeNeeded=true; holdScreen(); toast("記録を再開しました。音を有効にするため一度画面をタップしてください"); }
+renderAll();
+setInterval(tick,1000);
+// アカウント側の記録を読んでから起床処理（最大8秒待つ）
+let wakeDone=false; const runWake=()=>{ if(!wakeDone){ wakeDone=true; handleWake(); } };
+setTimeout(runWake,8000);
+connectDb().finally(runWake);
+})();
+</script>
+</body>
+</html>
